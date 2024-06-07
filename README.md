@@ -9,7 +9,7 @@
 - You attack automatically, so don't worry about mashing mouse one
   
 # Credits
-- Chris's tutorials - particularly his how to make a platformer tutorial parts 1-3
+- Chris's tutorials - particularly his how to make a godot platformer tutorial parts 1-3
 - Animations by @orangeychicken_art with the exception of spawning animation, which was made by me
 - [CoffeeCrow for helping me understand projectiles](https://www.youtube.com/watch?v=vDlzmPL5PDs&pp=ygUXY29mZmVlY3JvdyBwcm9qZWN0aWw7ZXM%3D)
 - [collisions](https://www.youtube.com/watch?v=EqxyCswIVfM&t=2s&pp=ygUQY29sbGlzaW9ucyBnb2RvdA%3D%3D)
