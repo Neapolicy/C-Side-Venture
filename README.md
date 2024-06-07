@@ -15,5 +15,5 @@
 - [collisions](https://www.youtube.com/watch?v=EqxyCswIVfM&t=2s&pp=ygUQY29sbGlzaW9ucyBnb2RvdA%3D%3D)
 - [Dalton5000 for the fonts](https://godotengine.org/asset-library/asset/316)
 - Map from Stage 2 Holooffice from Holocure by Kay Yu
-- All music and sfx comes from Youtube Audio Library, unfortunately cannot link them all
+- All music and sfx comes from Youtube Audio Library, unfortunately I cannot link them all
 - rest of the graphics by me, except the boss bullet and player bullet
