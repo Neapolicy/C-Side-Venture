@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dqgrso333ngj3"
+path="res://.godot/imported/hubris_exit.mp3-23dca18838fe91ed94793b2d00c506bd.mp3str"
+
+[deps]
+
+source_file="res://Audio/Player Sounds/hubris_exit.mp3"
+dest_files=["res://.godot/imported/hubris_exit.mp3-23dca18838fe91ed94793b2d00c506bd.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

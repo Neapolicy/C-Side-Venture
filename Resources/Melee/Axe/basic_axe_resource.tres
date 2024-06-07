@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MeleeBase" load_steps=3 format=3 uid="uid://b1xm7xn6r3e00"]
+
+[ext_resource type="Script" path="res://Resources/Melee/Melee_Base.gd" id="1_jdcky"]
+[ext_resource type="Texture2D" uid="uid://qan0ut81dx3n" path="res://Art/Sprites/Slash.png" id="1_k6r1b"]
+
+[resource]
+script = ExtResource("1_jdcky")
+melee_sprite = ExtResource("1_k6r1b")
+damage = 0.0

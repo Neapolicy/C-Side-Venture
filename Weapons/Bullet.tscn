@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdj1338rnhqas"]
+
+[ext_resource type="Script" path="res://Weapons/bullet.gd" id="1_1o78h"]
+[ext_resource type="Texture2D" uid="uid://b7d62sfv584as" path="res://Art/Sprites/Bullet.png" id="2_8cp3r"]
+[ext_resource type="AudioStream" uid="uid://bd3euhm6eusa" path="res://Audio/fire.wav" id="3_whdd1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5s3qd"]
+
+[node name="Bullet" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("1_1o78h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("2_8cp3r")
+
+[node name="VisibleNotifier" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="LifeTimer" type="Timer" parent="."]
+
+[node name="Area2D" type="Area2D" parent="." groups=["bullet"]]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_5s3qd")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_whdd1")
+
+[connection signal="screen_exited" from="VisibleNotifier" to="." method="_on_visible_notifier_screen_exited"]
+[connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

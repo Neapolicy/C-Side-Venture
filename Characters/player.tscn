@@ -1,0 +1,353 @@
+[gd_scene load_steps=36 format=3 uid="uid://5uf1g5ii51fk"]
+
+[ext_resource type="Texture2D" uid="uid://bmfmy0t6vytlr" path="res://Art/Sprites/player_idle.png" id="1_f5iqe"]
+[ext_resource type="Script" path="res://Characters/player.gd" id="1_rrdcm"]
+[ext_resource type="PackedScene" uid="uid://dkxohkb0ptbxv" path="res://Characters/Player FX/ghost.tscn" id="2_ye75b"]
+[ext_resource type="Texture2D" uid="uid://csq77j0lq4pnw" path="res://Art/Sprites/player_walk.png" id="3_r3e7u"]
+[ext_resource type="Script" path="res://Characters/CharStateMachine.gd" id="4_uhg3x"]
+[ext_resource type="Script" path="res://Characters/Alive.gd" id="5_hcrmf"]
+[ext_resource type="Resource" uid="uid://8ya2t11b5vjp" path="res://Resources/Projectiles/Bullet/basic_bullet_resource.tres" id="7_ekc3j"]
+[ext_resource type="Resource" uid="uid://b1xm7xn6r3e00" path="res://Resources/Melee/Axe/basic_axe_resource.tres" id="8_4axr4"]
+[ext_resource type="Script" path="res://Characters/Invincible.gd" id="8_iktup"]
+[ext_resource type="AudioStream" uid="uid://b0a1rghf4mt5l" path="res://Audio/Player Sounds/Hurt.mp3" id="8_iqjcv"]
+[ext_resource type="AudioStream" uid="uid://dqgrso333ngj3" path="res://Audio/Player Sounds/hubris_exit.mp3" id="9_cu7cl"]
+[ext_resource type="Script" path="res://Characters/Dash.gd" id="11_4h1lx"]
+[ext_resource type="Script" path="res://Characters/Skills.gd" id="11_4porr"]
+[ext_resource type="Script" path="res://Characters/Run n Gun.gd" id="13_ljyoq"]
+[ext_resource type="Script" path="res://Characters/Hack n Slash.gd" id="14_owb4j"]
+[ext_resource type="Script" path="res://Characters/Vulture.gd" id="15_3hprt"]
+[ext_resource type="Script" path="res://Characters/Hubris.gd" id="15_gvl8b"]
+[ext_resource type="AudioStream" uid="uid://ca1k2rf52idly" path="res://Audio/Player Sounds/hubris_enter.mp3" id="17_cnh7e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gcttc"]
+
+[sub_resource type="Animation" id="Animation_vex2t"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [ExtResource("1_f5iqe")]
+}
+
+[sub_resource type="Animation" id="Animation_amxlh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_7s8p3"]
+resource_name = "Run"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [2, 3, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [ExtResource("3_r3e7u")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4m7tc"]
+_data = {
+"Idle": SubResource("Animation_vex2t"),
+"RESET": SubResource("Animation_amxlh"),
+"Run": SubResource("Animation_7s8p3")
+}
+
+[sub_resource type="Animation" id="Animation_dk2to"]
+resource_name = "Hurt"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.890196, 0.0823529, 0.188235, 0.517647), Color(1, 1, 1, 0.505882)]
+}
+
+[sub_resource type="Animation" id="Animation_c6qcs"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_via68"]
+_data = {
+"Hurt": SubResource("Animation_dk2to"),
+"RESET": SubResource("Animation_c6qcs")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sici4"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2x2wr"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g07oh"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fb8wn"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a5h2r"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_na1w4"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_sici4")
+blend_point_0/pos = Vector2(0, 0)
+blend_point_1/node = SubResource("AnimationNodeAnimation_2x2wr")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_g07oh")
+blend_point_2/pos = Vector2(1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_fb8wn")
+blend_point_3/pos = Vector2(0, -1)
+blend_point_4/node = SubResource("AnimationNodeAnimation_a5h2r")
+blend_point_4/pos = Vector2(-1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0evmg"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wwn55"]
+states/Move/node = SubResource("AnimationNodeBlendSpace2D_na1w4")
+states/Move/position = Vector2(439, 100)
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_0evmg")]
+graph_offset = Vector2(-22.3428, 0)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_b3v4g"]
+
+[node name="Player" type="CharacterBody2D" groups=["player_data"]]
+collision_layer = 2
+slide_on_ceiling = false
+script = ExtResource("1_rrdcm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_gcttc")
+debug_color = Color(0, 0.558696, 0.891924, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
+position = Vector2(-0.5, -0.5)
+scale = Vector2(0.09375, 0.09375)
+texture = ExtResource("3_r3e7u")
+hframes = 4
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+anchors_preset = -1
+anchor_left = -0.15
+anchor_top = -0.116
+anchor_right = 1.184
+anchor_bottom = 1.15
+offset_left = -160.0
+offset_top = -159.88
+offset_right = -159.88
+offset_bottom = -160.0
+color = Color(1, 1, 1, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4m7tc")
+}
+
+[node name="EffectsPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_via68")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4m7tc")
+}
+tree_root = SubResource("AnimationNodeStateMachine_wwn55")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Move/blend_position = Vector2(0.993168, -0.0440677)
+
+[node name="CharStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "currentState", "animationTree")]
+script = ExtResource("4_uhg3x")
+character = NodePath("..")
+currentState = NodePath("Alive")
+animationTree = NodePath("../AnimationTree")
+
+[node name="Alive" type="Node" parent="CharStateMachine" node_paths=PackedStringArray("invincibleState", "player")]
+script = ExtResource("5_hcrmf")
+invincibleState = NodePath("../Invincible")
+player = NodePath("../..")
+projectile = ExtResource("7_ekc3j")
+slash = ExtResource("8_4axr4")
+
+[node name="Timer" type="Timer" parent="CharStateMachine/Alive"]
+process_callback = 0
+wait_time = 2.0
+autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CharStateMachine/Alive"]
+stream = ExtResource("8_iqjcv")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="CharStateMachine/Alive"]
+stream = ExtResource("9_cu7cl")
+
+[node name="Invincible" type="Node" parent="CharStateMachine" node_paths=PackedStringArray("alive_state", "player")]
+script = ExtResource("8_iktup")
+alive_state = NodePath("../Alive")
+player = NodePath("../..")
+
+[node name="Timer" type="Timer" parent="CharStateMachine/Invincible"]
+process_callback = 0
+
+[node name="Skills" type="Node" parent="." node_paths=PackedStringArray("player", "state")]
+script = ExtResource("11_4porr")
+player = NodePath("..")
+state = NodePath("../CharStateMachine/Alive")
+
+[node name="Dash" type="Node" parent="Skills" node_paths=PackedStringArray("player")]
+script = ExtResource("11_4h1lx")
+ghost_scene = ExtResource("2_ye75b")
+player = NodePath("../..")
+
+[node name="GhostTimer" type="Timer" parent="Skills/Dash"]
+wait_time = 0.2
+
+[node name="Cooldown" type="Timer" parent="Skills/Dash"]
+wait_time = 5.0
+
+[node name="Run n Gun" type="Node" parent="Skills" node_paths=PackedStringArray("player", "state")]
+script = ExtResource("13_ljyoq")
+player = NodePath("../..")
+state = NodePath("../../CharStateMachine/Alive")
+
+[node name="Cooldown" type="Timer" parent="Skills/Run n Gun"]
+wait_time = 15.0
+
+[node name="Duration" type="Timer" parent="Skills/Run n Gun"]
+wait_time = 5.0
+
+[node name="Hack n Slash" type="Node" parent="Skills" node_paths=PackedStringArray("player", "state")]
+script = ExtResource("14_owb4j")
+player = NodePath("../..")
+state = NodePath("../../CharStateMachine/Alive")
+
+[node name="Cooldown" type="Timer" parent="Skills/Hack n Slash"]
+wait_time = 15.0
+
+[node name="Hubris" type="Node" parent="Skills" node_paths=PackedStringArray("player", "state")]
+script = ExtResource("15_gvl8b")
+player = NodePath("../..")
+state = NodePath("../../CharStateMachine/Alive")
+
+[node name="Cooldown" type="Timer" parent="Skills/Hubris"]
+wait_time = 3.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Skills/Hubris"]
+stream = ExtResource("17_cnh7e")
+
+[node name="Vulture" type="Node" parent="Skills" node_paths=PackedStringArray("player", "state")]
+script = ExtResource("15_3hprt")
+player = NodePath("../..")
+state = NodePath("../../CharStateMachine/Alive")
+
+[node name="Hurtbox" type="Area2D" parent="." groups=["player"]]
+collision_layer = 2
+collision_mask = 37
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_b3v4g")
+debug_color = Color(0.917647, 0.207843, 0.505882, 0.419608)
+
+[connection signal="timeout" from="CharStateMachine/Alive/Timer" to="CharStateMachine/Alive" method="_on_timer_timeout"]
+[connection signal="timeout" from="CharStateMachine/Invincible/Timer" to="CharStateMachine/Invincible" method="_on_timer_timeout"]
+[connection signal="timeout" from="Skills/Dash/GhostTimer" to="Skills/Dash" method="_on_ghost_timer_timeout"]
+[connection signal="timeout" from="Skills/Dash/Cooldown" to="Skills/Dash" method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Skills/Run n Gun/Cooldown" to="Skills/Run n Gun" method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Skills/Run n Gun/Duration" to="Skills/Run n Gun" method="_on_duration_timeout"]
+[connection signal="timeout" from="Skills/Hack n Slash/Cooldown" to="Skills/Hack n Slash" method="_on_cooldown_timeout"]
+[connection signal="timeout" from="Skills/Hubris/Cooldown" to="Skills/Hubris" method="_on_cooldown_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="CharStateMachine/Alive" method="_on_hurtbox_area_entered"]

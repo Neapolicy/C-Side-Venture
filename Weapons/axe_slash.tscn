@@ -1,0 +1,119 @@
+[gd_scene load_steps=9 format=3 uid="uid://3wvargftbqdm"]
+
+[ext_resource type="Texture2D" uid="uid://qan0ut81dx3n" path="res://Art/Sprites/Slash.png" id="1_im6wh"]
+[ext_resource type="Script" path="res://Weapons/axe_slash.gd" id="1_wj811"]
+[ext_resource type="AudioStream" uid="uid://c86ibqj5dt1pu" path="res://Audio/swing.wav" id="3_w13wa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ljwsh"]
+size = Vector2(38, 66)
+
+[sub_resource type="Animation" id="Animation_i2qk2"]
+resource_name = "Attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_im6wh")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Area2D:monitoring")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_hkmp6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xsrgq"]
+_data = {
+"Attack": SubResource("Animation_i2qk2"),
+"RESET": SubResource("Animation_hkmp6")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ikq8"]
+animation = &"Attack"
+
+[node name="AxeSlash" type="CharacterBody2D"]
+script = ExtResource("1_wj811")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.157813, 0.179688)
+texture = ExtResource("1_im6wh")
+hframes = 5
+
+[node name="Area2D" type="Area2D" parent="." groups=["axe"]]
+position = Vector2(2, -3)
+collision_layer = 16
+collision_mask = 4
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2, 2)
+shape = SubResource("RectangleShape2D_ljwsh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xsrgq")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xsrgq")
+}
+tree_root = SubResource("AnimationNodeAnimation_0ikq8")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_w13wa")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

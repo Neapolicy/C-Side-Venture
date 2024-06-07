@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ca1k2rf52idly"
+path="res://.godot/imported/hubris_enter.mp3-dc8d24a6b6290a9a9ba2dfc338b3dbf9.mp3str"
+
+[deps]
+
+source_file="res://Audio/Player Sounds/hubris_enter.mp3"
+dest_files=["res://.godot/imported/hubris_enter.mp3-dc8d24a6b6290a9a9ba2dfc338b3dbf9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

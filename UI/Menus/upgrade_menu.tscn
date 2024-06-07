@@ -1,0 +1,208 @@
+[gd_scene load_steps=6 format=3 uid="uid://bluwcg1fp8y4h"]
+
+[ext_resource type="Shader" path="res://UI/Menus/pause_menu.gdshader" id="1_mch3t"]
+[ext_resource type="Script" path="res://UI/Menus/upgrade_menu.gd" id="1_or4gr"]
+[ext_resource type="FontFile" uid="uid://bwm8n8xaf2a5p" path="res://Fonts/ArchitectsDaughter.ttf" id="3_704sv"]
+[ext_resource type="Script" path="res://UI/Menus/Label.gd" id="3_cfs83"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rntdu"]
+shader = ExtResource("1_mch3t")
+shader_parameter/LOD = 3.0
+
+[node name="UpgradeMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_or4gr")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_rntdu")
+layout_mode = 0
+offset_left = -500.0
+offset_top = -250.0
+offset_right = 500.0
+offset_bottom = 250.0
+
+[node name="MarginContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 70.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -106.5
+offset_top = -59.0
+offset_right = 106.5
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="Axe" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Axe Upgrade"
+alignment = 0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Axe"]
+layout_mode = 0
+offset_left = 2.5
+offset_top = 25.0
+offset_right = 137.5
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "Damage Upgrade"
+
+[node name="Bullet" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Bullet Upgrade"
+alignment = 0
+
+[node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer/Bullet"]
+layout_mode = 0
+offset_left = 2.5
+offset_top = 24.0
+offset_right = 137.5
+offset_bottom = 49.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "Damage Upgrade"
+
+[node name="Dash" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dash"
+alignment = 0
+
+[node name="Label3" type="Label" parent="ScrollContainer/VBoxContainer/Dash"]
+layout_mode = 0
+offset_left = 3.5
+offset_top = 25.0
+offset_right = 138.5
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "Self Explanitory "
+
+[node name="Run n Gun" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Run n' Gun"
+alignment = 0
+
+[node name="Label4" type="Label" parent="ScrollContainer/VBoxContainer/Run n Gun"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 25.0
+offset_right = 394.0
+offset_bottom = 50.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "Increase movement speed while doubling the amount of bullets you shoot"
+
+[node name="Hack Away" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Hack Away "
+alignment = 0
+
+[node name="Label5" type="Label" parent="ScrollContainer/VBoxContainer/Hack Away"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 25.0
+offset_right = 398.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "A rapid series of slashes, albeit each slash does reduced damage"
+
+[node name="Hubris" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Hubris "
+alignment = 0
+
+[node name="FlavorText" type="Label" parent="ScrollContainer/VBoxContainer/Hubris"]
+layout_mode = 2
+offset_left = 4.5
+offset_top = 25.0
+offset_right = 407.5
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "\"Nah, I'd win.\" - Someone who in fact, did not win"
+
+[node name="Vulture" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Vulture"
+alignment = 0
+
+[node name="Label6" type="Label" parent="ScrollContainer/VBoxContainer/Vulture"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 25.0
+offset_right = 409.0
+offset_bottom = 48.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "Chance to heal a bit of hp at every kill, each level improves amount healed"
+
+[node name="AS Upgrade" type="Button" parent="ScrollContainer/VBoxContainer"]
+layout_mode = 2
+text = "Attack Speed Upgrade"
+alignment = 0
+
+[node name="Label7" type="Label" parent="ScrollContainer/VBoxContainer/AS Upgrade"]
+layout_mode = 0
+offset_left = 5.5
+offset_top = 25.0
+offset_right = 224.5
+offset_bottom = 54.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = ExtResource("3_704sv")
+theme_override_font_sizes/font_size = 8
+text = "Attack Speed Upgrade "
+
+[node name="Money" type="Label" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 4.0
+offset_right = 51.0
+offset_bottom = 27.0
+script = ExtResource("3_cfs83")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Axe" to="." method="_on_axe_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Bullet" to="." method="_on_bullet_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Dash" to="." method="_on_dash_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Run n Gun" to="." method="_on_run_n_gun_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Hack Away" to="." method="_on_hack_away_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Hubris" to="." method="_on_hubris_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/Vulture" to="." method="_on_vulture_pressed"]
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/AS Upgrade" to="." method="_on_as_upgrade_pressed"]
